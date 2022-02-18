@@ -36,7 +36,11 @@ resource "aws_lb_listener" "this" {
     target_group_arn = lookup(lookup(each.value, "forward", {}), "target_group_arn", null)
 
     dynamic "redirect" {
-      for_each = lookup(each.value, "redirect", null) != null ? [lookup(each.value, "redirect", null)] : []
+      for_each = (
+        lookup(each.value, "redirect", null) != null ?
+        [lookup(each.value, "redirect", null)] :
+        []
+      )
 
       content {
         port        = lookup(redirect.value, "port", null)
@@ -46,7 +50,11 @@ resource "aws_lb_listener" "this" {
     }
 
     dynamic "fixed_response" {
-      for_each = lookup(each.value, "fixed_response", null) != null ? [lookup(each.value, "fixed_response", null)] : []
+      for_each = (
+        lookup(each.value, "fixed_response", null) != null ?
+        [lookup(each.value, "fixed_response", null)] :
+        []
+      )
 
       content {
         status_code  = lookup(fixed_response.value, "status_code", null)
@@ -81,7 +89,11 @@ resource "aws_lb_listener_rule" "this" {
     target_group_arn = lookup(lookup(each.value, "forward", {}), "target_group_arn", null)
 
     dynamic "redirect" {
-      for_each = lookup(each.value, "action", null) == "redirect" ? [lookup(each.value, "redirect", null)] : []
+      for_each = (
+        lookup(each.value, "action", null) == "redirect" ?
+        [lookup(each.value, "redirect", null)] :
+        []
+      )
 
       content {
         port        = lookup(redirect.value, "port", null)
@@ -91,7 +103,11 @@ resource "aws_lb_listener_rule" "this" {
     }
 
     dynamic "fixed_response" {
-      for_each = lookup(each.value, "action", null) == "fixed_response" ? [lookup(each.value, "fixed_response", null)] : []
+      for_each = (
+        lookup(each.value, "action", null) == "fixed_response" ?
+        [lookup(each.value, "fixed_response", null)] :
+        []
+      )
 
       content {
         status_code  = lookup(fixed_response.value, "status_code", null)
