@@ -32,9 +32,7 @@ resource "aws_acm_certificate" "this" {}
 module "alb" {
   source = "../../"
 
-  project_name = "complete"
-  application  = "alb"
-  environment  = "dev"
+  name = "complete-alb-dev"
 
   type            = "application"
   internal        = false

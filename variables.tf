@@ -1,16 +1,6 @@
-variable "project_name" {
+variable "name" {
   type        = string
-  description = "Project name"
-}
-
-variable "application" {
-  type        = string
-  description = "Current application"
-}
-
-variable "environment" {
-  type        = string
-  description = "Current environment"
+  description = "AWS Load Balancer name"
 }
 
 variable "type" {
