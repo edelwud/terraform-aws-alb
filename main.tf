@@ -1,5 +1,5 @@
 resource "aws_lb" "this" {
-  name = "${var.project_name}-${var.application}-${var.environment}"
+  name = var.name
 
   internal           = var.internal
   load_balancer_type = var.type
@@ -11,7 +11,7 @@ resource "aws_lb" "this" {
   security_groups = var.security_groups
 
   tags = merge(var.tags, {
-    Name = "${var.project_name}-${var.application}-${var.environment}"
+    Name = var.name
   })
 }
 
@@ -65,7 +65,7 @@ resource "aws_lb_listener" "this" {
   }
 
   tags = merge(var.tags, {
-    Name = "${var.project_name}-${var.application}-${var.environment}-${each.key}"
+    Name = "${var.name}-${each.key}"
   })
 }
 
@@ -140,6 +140,6 @@ resource "aws_lb_listener_rule" "this" {
   }
 
   tags = merge(var.tags, {
-    Name = "${var.project_name}-${var.application}-${var.environment}-${each.key}"
+    Name = "${var.name}-${each.key}"
   })
 }
