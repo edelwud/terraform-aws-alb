@@ -29,7 +29,7 @@ resource "aws_lb_listener" "this" {
     type = (
       lookup(each.value, "forward", null) != null ? "forward" :
       lookup(each.value, "redirect", null) != null ? "redirect" :
-      lookup(each.value, "fixed_response", null) != null ? "fixed_response" :
+      lookup(each.value, "fixed_response", null) != null ? "fixed-response" :
       null
     )
 
@@ -82,7 +82,7 @@ resource "aws_lb_listener_rule" "this" {
     type = (
       lookup(each.value, "forward", null) != null ? "forward" :
       lookup(each.value, "redirect", null) != null ? "redirect" :
-      lookup(each.value, "fixed_response", null) != null ? "fixed_response" :
+      lookup(each.value, "fixed_response", null) != null ? "fixed-response" :
       null
     )
 
@@ -134,6 +134,40 @@ resource "aws_lb_listener_rule" "this" {
 
         content {
           values = path_pattern.value
+        }
+      }
+
+      dynamic "query_string" {
+        for_each = condition.key == "query_string" ? condition.value : []
+
+        content {
+          key   = lookup(query_string.value, "key", null)
+          value = lookup(query_string.value, "value", null)
+        }
+      }
+
+      dynamic "http_header" {
+        for_each = condition.key == "http_header" ? condition.value : []
+
+        content {
+          http_header_name = lookup(http_header.value, "http_header_name", null)
+          values           = lookup(http_header.value, "values", null)
+        }
+      }
+
+      dynamic "http_request_method" {
+        for_each = condition.key == "http_request_method" ? [condition.value] : []
+
+        content {
+          values = http_request_method.value
+        }
+      }
+
+      dynamic "source_ip" {
+        for_each = condition.key == "source_ip" ? [condition.value] : []
+
+        content {
+          values = source_ip.value
         }
       }
     }
