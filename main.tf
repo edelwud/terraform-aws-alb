@@ -71,7 +71,12 @@ resource "aws_lb_listener_rule" "this" {
   listener_arn = aws_lb_listener.this[lookup(each.value, "rule_name", null)].arn
 
   action {
-    type = lookup(each.value, "action", null)
+    type = (
+      lookup(each.value, "forward", null) != null ? "forward" :
+      lookup(each.value, "redirect", null) != null ? "redirect" :
+      lookup(each.value, "fixed_response", null) != null ? "fixed_response" :
+      null
+    )
 
     target_group_arn = lookup(lookup(each.value, "forward", {}), "target_group_arn", null)
 

@@ -44,8 +44,8 @@ module "alb" {
 
   listeners = {
     "redirect-to-https" = {
-      port        = 80
-      protocol    = "HTTP"
+      port     = 80
+      protocol = "HTTP"
 
       redirect = {
         port        = "443"
@@ -65,7 +65,6 @@ module "alb" {
 
       rules = {
         "to-api" = {
-          action   = "forward"
           priority = 20
 
           conditions = {
