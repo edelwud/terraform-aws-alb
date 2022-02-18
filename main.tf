@@ -25,6 +25,53 @@ resource "aws_lb_listener" "this" {
 
   load_balancer_arn = aws_lb.this.arn
 
+  dynamic "default_action" {
+    for_each = (
+      lookup(each.value, "authenticate_cognito", null) != null ? [1] :
+      lookup(each.value, "authenticate_oidc", null) != null ? [1] :
+      []
+    )
+
+    content {
+      type = (
+        lookup(each.value, "authenticate_cognito", null) != null ? "authenticate-cognito" :
+        lookup(each.value, "authenticate_oidc", null) != null ? "authenticate-oidc" :
+        null
+      )
+
+      dynamic "authenticate_cognito" {
+        for_each = (
+          lookup(each.value, "authenticate_cognito", null) != null ?
+          [lookup(each.value, "authenticate_cognito", null)] :
+          []
+        )
+
+        content {
+          user_pool_arn       = lookup(authenticate_cognito.value, "user_pool_arn", null)
+          user_pool_client_id = lookup(authenticate_cognito.value, "user_pool_client_id", null)
+          user_pool_domain    = lookup(authenticate_cognito.value, "user_pool_domain", null)
+        }
+      }
+
+      dynamic "authenticate_oidc" {
+        for_each = (
+          lookup(each.value, "authenticate_oidc", null) != null ?
+          [lookup(each.value, "authenticate_oidc", null)] :
+          []
+        )
+
+        content {
+          authorization_endpoint = lookup(authenticate_oidc.value, "authorization_endpoint", null)
+          client_id              = lookup(authenticate_oidc.value, "client_id", null)
+          client_secret          = lookup(authenticate_oidc.value, "client_secret", null)
+          issuer                 = lookup(authenticate_oidc.value, "issuer", null)
+          token_endpoint         = lookup(authenticate_oidc.value, "token_endpoint", null)
+          user_info_endpoint     = lookup(authenticate_oidc.value, "user_info_endpoint", null)
+        }
+      }
+    }
+  }
+
   default_action {
     type = (
       lookup(each.value, "forward", null) != null ? "forward" :
@@ -77,6 +124,53 @@ resource "aws_lb_listener_rule" "this" {
 
   priority     = lookup(each.value, "priority", null)
   listener_arn = aws_lb_listener.this[lookup(each.value, "rule_name", null)].arn
+
+  dynamic "action" {
+    for_each = (
+      lookup(each.value, "authenticate_cognito", null) != null ? [1] :
+      lookup(each.value, "authenticate_oidc", null) != null ? [1] :
+      []
+    )
+
+    content {
+      type = (
+        lookup(each.value, "authenticate_cognito", null) != null ? "authenticate-cognito" :
+        lookup(each.value, "authenticate_oidc", null) != null ? "authenticate-oidc" :
+        null
+      )
+
+      dynamic "authenticate_cognito" {
+        for_each = (
+          lookup(each.value, "authenticate_cognito", null) != null ?
+          [lookup(each.value, "authenticate_cognito", null)] :
+          []
+        )
+
+        content {
+          user_pool_arn       = lookup(authenticate_cognito.value, "user_pool_arn", null)
+          user_pool_client_id = lookup(authenticate_cognito.value, "user_pool_client_id", null)
+          user_pool_domain    = lookup(authenticate_cognito.value, "user_pool_domain", null)
+        }
+      }
+
+      dynamic "authenticate_oidc" {
+        for_each = (
+          lookup(each.value, "authenticate_oidc", null) != null ?
+          [lookup(each.value, "authenticate_oidc", null)] :
+          []
+        )
+
+        content {
+          authorization_endpoint = lookup(authenticate_oidc.value, "authorization_endpoint", null)
+          client_id              = lookup(authenticate_oidc.value, "client_id", null)
+          client_secret          = lookup(authenticate_oidc.value, "client_secret", null)
+          issuer                 = lookup(authenticate_oidc.value, "issuer", null)
+          token_endpoint         = lookup(authenticate_oidc.value, "token_endpoint", null)
+          user_info_endpoint     = lookup(authenticate_oidc.value, "user_info_endpoint", null)
+        }
+      }
+    }
+  }
 
   action {
     type = (
@@ -134,40 +228,6 @@ resource "aws_lb_listener_rule" "this" {
 
         content {
           values = path_pattern.value
-        }
-      }
-
-      dynamic "query_string" {
-        for_each = condition.key == "query_string" ? condition.value : []
-
-        content {
-          key   = lookup(query_string.value, "key", null)
-          value = lookup(query_string.value, "value", null)
-        }
-      }
-
-      dynamic "http_header" {
-        for_each = condition.key == "http_header" ? condition.value : []
-
-        content {
-          http_header_name = lookup(http_header.value, "http_header_name", null)
-          values           = lookup(http_header.value, "values", null)
-        }
-      }
-
-      dynamic "http_request_method" {
-        for_each = condition.key == "http_request_method" ? [condition.value] : []
-
-        content {
-          values = http_request_method.value
-        }
-      }
-
-      dynamic "source_ip" {
-        for_each = condition.key == "source_ip" ? [condition.value] : []
-
-        content {
-          values = source_ip.value
         }
       }
     }

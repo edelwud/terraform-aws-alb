@@ -60,9 +60,15 @@ module "alb" {
   vpc_id          = module.vpc.vpc_id
 
   listeners = {
-    "redirect-to-https" = {
+    "for-example-1" = {
       port     = 80
       protocol = "HTTP"
+
+      authenticate_cognito = {
+        user_pool_arn       = "aws_cognito_user_pool.pool.arn"
+        user_pool_client_id = "aws_cognito_user_pool_client.client.id"
+        user_pool_domain    = "aws_cognito_user_pool_domain.domain.domain"
+      }
 
       fixed_response = {
         content_type = "text/plain"
@@ -95,6 +101,15 @@ module "alb" {
         }
         "to-ui" = {
           priority = 40
+
+          authenticate_oidc = {
+            authorization_endpoint = "https://example.com/authorization_endpoint"
+            client_id              = "client_id"
+            client_secret          = "client_secret"
+            issuer                 = "https://example.com"
+            token_endpoint         = "https://example.com/token_endpoint"
+            user_info_endpoint     = "https://example.com/user_info_endpoint"
+          }
 
           conditions = {
             http_header = [
