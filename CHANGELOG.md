@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.4.0...v1.5.0) (2022-02-18)
+
+
+### Features
+
+* add `authenticate_cognito` and `authenticate_oidc` listener implementation ([01ccda8](https://github.com/edelwud/terrafrom-aws-alb/commit/01ccda8a72b9791e790cad734d4dc42504952630))
+* add `authenticate_cognito` and `authenticate_oidc` listener rule implementation ([27310f7](https://github.com/edelwud/terrafrom-aws-alb/commit/27310f75415f22f9e4b4260c8b7935beb244ef5f))
+* complete `authenticate_*` example ([39f0960](https://github.com/edelwud/terrafrom-aws-alb/commit/39f0960edafc38a42d7e671c46aadd942a9ad71c))
+
+
+### Bug Fixes
+
+* local sub-rule `authenticate_cognito` and `authenticate_oidc` identify ([6021b92](https://github.com/edelwud/terrafrom-aws-alb/commit/6021b92016578e073a8755ba7902ef9c8f1854f8))
+
 ## [1.4.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.3.0...v1.4.0) (2022-02-18)
 
 
