@@ -32,9 +32,7 @@ resource "aws_acm_certificate" "this" {}
 module "alb" {
   source = "../../"
 
-  project_name = "complete"
-  application  = "alb"
-  environment  = "dev"
+  name = "complete-alb-dev"
 
   type            = "application"
   internal        = false
@@ -42,11 +40,10 @@ module "alb" {
   subnets         = module.vpc.public_subnets
   vpc_id          = module.vpc.vpc_id
 
-  http_listeners = {
-    "redirect-to-https" : {
-      port        = 80
-      protocol    = "HTTP"
-      action_type = "redirect"
+  listeners = {
+    "redirect-to-https" = {
+      port     = 80
+      protocol = "HTTP"
 
       redirect = {
         port        = "443"
@@ -54,13 +51,9 @@ module "alb" {
         status_code = "HTTP_301"
       }
     }
-  }
-
-  https_listeners = {
-    "forward to ui" : {
+    "forward-to-ui" = {
       port            = 443
       protocol        = "HTTPS"
-      action_type     = "forward"
       ssl_policy      = "ELBSecurityPolicy-2016-08"
       certificate_arn = aws_acm_certificate.this.arn
 
@@ -69,8 +62,7 @@ module "alb" {
       }
 
       rules = {
-        "to-api" : {
-          action   = "forward"
+        "to-api" = {
           priority = 20
 
           conditions = {

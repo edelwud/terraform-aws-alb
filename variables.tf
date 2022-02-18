@@ -1,30 +1,17 @@
-variable "project_name" {
+variable "name" {
   type        = string
-  description = "Project name"
-}
-
-variable "application" {
-  type        = string
-  description = "Current application"
-}
-
-variable "environment" {
-  type        = string
-  description = "Current environment"
+  description = "AWS Load Balancer name"
 }
 
 variable "type" {
   type        = string
+  default     = "application"
   description = "AWS load balancer type"
-
-  validation {
-    condition     = var.type != "application" || var.type != "network" || var.type != "gateway"
-    error_message = "AWS Load Balancer type is not valid."
-  }
 }
 
 variable "internal" {
   type        = bool
+  default     = false
   description = "Is AWS Load Balancer internal?"
 }
 
@@ -55,26 +42,14 @@ variable "deletion_protection" {
   description = "AWS LB deletion protection"
 }
 
-variable "acm_certificate" {
-  type        = string
-  default     = null
-  description = "AWS ACM certificate"
-}
-
 variable "tags" {
   type        = map(string)
   default     = null
   description = "Tags"
 }
 
-variable "http_listeners" {
+variable "listeners" {
   type        = any
   default     = null
-  description = "AWS LB http listeners"
-}
-
-variable "https_listeners" {
-  type        = any
-  default     = null
-  description = "AWS LB https listeners"
+  description = "AWS LB listeners"
 }
