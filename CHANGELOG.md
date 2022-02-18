@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.3.0...v1.4.0) (2022-02-18)
+
+
+### Features
+
+* `complete-alb` security groups and `fixed_response` creation ([18a3243](https://github.com/edelwud/terrafrom-aws-alb/commit/18a32433cdf817f91d2f9d4a1cc57e6c0bc1da1c))
+* added `http_header`, `http_request_method`, `query_string`, `source_ip` conditions ([e6e454f](https://github.com/edelwud/terrafrom-aws-alb/commit/e6e454fc79c09e93ae17288837fff1d6b8538b84))
+
+
+### Bug Fixes
+
+* example `complete-alb` vpc azs ([f240a02](https://github.com/edelwud/terrafrom-aws-alb/commit/f240a02671a8f6b24457cde7797d759ec4d08e92))
+* listener and listener rule `fixed_response` action ([5b06d8e](https://github.com/edelwud/terrafrom-aws-alb/commit/5b06d8e720ec21019106d68dd1117ff1c59d29c1))
+
 ## [1.3.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.2.0...v1.3.0) (2022-02-18)
 
 
