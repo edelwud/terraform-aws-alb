@@ -29,7 +29,7 @@ resource "aws_lb_listener" "this" {
     type = (
       lookup(each.value, "forward", null) != null ? "forward" :
       lookup(each.value, "redirect", null) != null ? "redirect" :
-      lookup(each.value, "fixed_response", null) != null ? "fixed_response" :
+      lookup(each.value, "fixed_response", null) != null ? "fixed-response" :
       null
     )
 
@@ -82,7 +82,7 @@ resource "aws_lb_listener_rule" "this" {
     type = (
       lookup(each.value, "forward", null) != null ? "forward" :
       lookup(each.value, "redirect", null) != null ? "redirect" :
-      lookup(each.value, "fixed_response", null) != null ? "fixed_response" :
+      lookup(each.value, "fixed_response", null) != null ? "fixed-response" :
       null
     )
 
