@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.1.0...v1.2.0) (2022-02-18)
+
+
+### Features
+
+* initial complete alb ([7ec2d46](https://github.com/edelwud/terrafrom-aws-alb/commit/7ec2d46f239b9fd534580d5a8fa53ff9e8f05e99))
+
 ## [1.1.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.0.0...v1.1.0) (2022-02-18)
 
 
