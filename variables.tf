@@ -16,11 +16,6 @@ variable "environment" {
 variable "type" {
   type        = string
   description = "AWS load balancer type"
-
-  validation {
-    condition     = var.type != "application" || var.type != "network" || var.type != "gateway"
-    error_message = "AWS Load Balancer type is not valid."
-  }
 }
 
 variable "internal" {
@@ -67,14 +62,8 @@ variable "tags" {
   description = "Tags"
 }
 
-variable "http_listeners" {
+variable "listeners" {
   type        = any
   default     = null
-  description = "AWS LB http listeners"
-}
-
-variable "https_listeners" {
-  type        = any
-  default     = null
-  description = "AWS LB https listeners"
+  description = "AWS LB listeners"
 }

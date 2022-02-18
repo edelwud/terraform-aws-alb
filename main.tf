@@ -16,7 +16,7 @@ resource "aws_lb" "this" {
 }
 
 resource "aws_lb_listener" "this" {
-  for_each = merge(var.http_listeners, var.https_listeners)
+  for_each = var.listeners
 
   port            = lookup(each.value, "port", null)
   protocol        = lookup(each.value, "protocol", null)

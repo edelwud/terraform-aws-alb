@@ -1,6 +1,6 @@
 locals {
   sub_rules = flatten([
-    for rule_name, rule_payload in merge(var.http_listeners, var.https_listeners) : [
+    for rule_name, rule_payload in var.listeners : [
       for sub_rule_name, sub_rule_payload in lookup(rule_payload, "rules", {}) : {
         rule_name     = rule_name
         sub_rule_name = sub_rule_name

@@ -42,8 +42,8 @@ module "alb" {
   subnets         = module.vpc.public_subnets
   vpc_id          = module.vpc.vpc_id
 
-  http_listeners = {
-    "redirect-to-https" : {
+  listeners = {
+    "redirect-to-https" = {
       port        = 80
       protocol    = "HTTP"
       action_type = "redirect"
@@ -54,10 +54,7 @@ module "alb" {
         status_code = "HTTP_301"
       }
     }
-  }
-
-  https_listeners = {
-    "forward to ui" : {
+    "forward to ui" = {
       port            = 443
       protocol        = "HTTPS"
       action_type     = "forward"
@@ -69,7 +66,7 @@ module "alb" {
       }
 
       rules = {
-        "to-api" : {
+        "to-api" = {
           action   = "forward"
           priority = 20
 
