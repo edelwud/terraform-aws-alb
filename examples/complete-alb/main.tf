@@ -60,7 +60,7 @@ module "alb" {
   vpc_id          = module.vpc.vpc_id
 
   listeners = {
-    "redirect-to-https" = {
+    "for-example-1" = {
       port     = 80
       protocol = "HTTP"
 
@@ -95,6 +95,15 @@ module "alb" {
         }
         "to-ui" = {
           priority = 40
+
+          authenticate_oidc = {
+            authorization_endpoint = "https://example.com/authorization_endpoint"
+            client_id              = "client_id"
+            client_secret          = "client_secret"
+            issuer                 = "https://example.com"
+            token_endpoint         = "https://example.com/token_endpoint"
+            user_info_endpoint     = "https://example.com/user_info_endpoint"
+          }
 
           conditions = {
             http_header = [

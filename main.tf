@@ -25,6 +25,53 @@ resource "aws_lb_listener" "this" {
 
   load_balancer_arn = aws_lb.this.arn
 
+  dynamic "default_action" {
+    for_each = (
+      lookup(each.value, "authenticate_cognito", null) != null ? [1] :
+      lookup(each.value, "authenticate_oidc", null) != null ? [1] :
+      []
+    )
+
+    content {
+      type = (
+        lookup(each.value, "authenticate_cognito", null) != null ? "authenticate-cognito" :
+        lookup(each.value, "authenticate_oidc", null) != null ? "authenticate-oidc" :
+        null
+      )
+
+      dynamic "authenticate_cognito" {
+        for_each = (
+          lookup(each.value, "authenticate_cognito", null) != null ?
+          [lookup(each.value, "authenticate_cognito", null)] :
+          []
+        )
+
+        content {
+          user_pool_arn       = lookup(authenticate_cognito.value, "user_pool_arn", null)
+          user_pool_client_id = lookup(authenticate_cognito.value, "user_pool_client_id", null)
+          user_pool_domain    = lookup(authenticate_cognito.value, "user_pool_domain", null)
+        }
+      }
+
+      dynamic "authenticate_oidc" {
+        for_each = (
+          lookup(each.value, "authenticate_oidc", null) != null ?
+          [lookup(each.value, "authenticate_oidc", null)] :
+          []
+        )
+
+        content {
+          authorization_endpoint = lookup(authenticate_oidc.value, "authorization_endpoint", null)
+          client_id              = lookup(authenticate_oidc.value, "client_id", null)
+          client_secret          = lookup(authenticate_oidc.value, "client_secret", null)
+          issuer                 = lookup(authenticate_oidc.value, "issuer", null)
+          token_endpoint         = lookup(authenticate_oidc.value, "token_endpoint", null)
+          user_info_endpoint     = lookup(authenticate_oidc.value, "user_info_endpoint", null)
+        }
+      }
+    }
+  }
+
   default_action {
     type = (
       lookup(each.value, "forward", null) != null ? "forward" :
