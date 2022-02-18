@@ -21,6 +21,19 @@ module "vpc" {
   }
 }
 
+module "lb_sg" {
+  source = "terraform-aws-modules/security-group/aws"
+
+  name   = "complete-alb-dev"
+  vpc_id = module.vpc.vpc_id
+
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_rules       = ["https-443-tcp", "http-80-tcp"]
+
+  egress_cidr_blocks = ["0.0.0.0/0"]
+  egress_rules       = ["https-443-tcp", "http-80-tcp"]
+}
+
 resource "aws_lb_target_group" "api" {
   name     = "complete-alb-dev-1"
   port     = 80
@@ -42,7 +55,7 @@ module "alb" {
 
   type            = "application"
   internal        = false
-  security_groups = [module.vpc.default_security_group_id]
+  security_groups = [module.vpc.default_security_group_id, module.lb_sg.security_group_id]
   subnets         = module.vpc.public_subnets
   vpc_id          = module.vpc.vpc_id
 
@@ -51,10 +64,10 @@ module "alb" {
       port     = 80
       protocol = "HTTP"
 
-      redirect = {
-        port        = "443"
-        protocol    = "HTTPS"
-        status_code = "HTTP_301"
+      fixed_response = {
+        content_type = "text/plain"
+        message_body = "HEALTHY"
+        status_code  = "200"
       }
 
       rules = {
