@@ -46,7 +46,6 @@ module "alb" {
     "redirect-to-https" = {
       port        = 80
       protocol    = "HTTP"
-      action_type = "redirect"
 
       redirect = {
         port        = "443"
@@ -54,10 +53,9 @@ module "alb" {
         status_code = "HTTP_301"
       }
     }
-    "forward to ui" = {
+    "forward-to-ui" = {
       port            = 443
       protocol        = "HTTPS"
-      action_type     = "forward"
       ssl_policy      = "ELBSecurityPolicy-2016-08"
       certificate_arn = aws_acm_certificate.this.arn
 

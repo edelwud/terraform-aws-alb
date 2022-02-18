@@ -26,12 +26,17 @@ resource "aws_lb_listener" "this" {
   load_balancer_arn = aws_lb.this.arn
 
   default_action {
-    type = lookup(each.value, "action_type", null)
+    type = (
+      lookup(each.value, "forward", null) != null ? "forward" :
+      lookup(each.value, "redirect", null) != null ? "redirect" :
+      lookup(each.value, "fixed_response", null) != null ? "fixed_response" :
+      null
+    )
 
     target_group_arn = lookup(lookup(each.value, "forward", {}), "target_group_arn", null)
 
     dynamic "redirect" {
-      for_each = lookup(each.value, "action_type", null) == "redirect" ? [lookup(each.value, "redirect", null)] : []
+      for_each = lookup(each.value, "redirect", null) != null ? [lookup(each.value, "redirect", null)] : []
 
       content {
         port        = lookup(redirect.value, "port", null)
@@ -41,7 +46,7 @@ resource "aws_lb_listener" "this" {
     }
 
     dynamic "fixed_response" {
-      for_each = lookup(each.value, "action_type", null) == "fixed_response" ? [lookup(each.value, "fixed_response", null)] : []
+      for_each = lookup(each.value, "fixed_response", null) != null ? [lookup(each.value, "fixed_response", null)] : []
 
       content {
         status_code  = lookup(fixed_response.value, "status_code", null)
