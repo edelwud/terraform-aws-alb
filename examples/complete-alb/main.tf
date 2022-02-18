@@ -64,6 +64,12 @@ module "alb" {
       port     = 80
       protocol = "HTTP"
 
+      authenticate_cognito = {
+        user_pool_arn       = "aws_cognito_user_pool.pool.arn"
+        user_pool_client_id = "aws_cognito_user_pool_client.client.id"
+        user_pool_domain    = "aws_cognito_user_pool_domain.domain.domain"
+      }
+
       fixed_response = {
         content_type = "text/plain"
         message_body = "HEALTHY"
