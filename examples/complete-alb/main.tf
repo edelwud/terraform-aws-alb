@@ -75,11 +75,40 @@ module "alb" {
           priority = 20
 
           conditions = {
+            host_header  = ["example.com"]
             path_pattern = ["/api*"]
+            query_string = [
+              {
+                key   = "health"
+                value = "check"
+              },
+              {
+                key   = "something"
+                value = "else"
+              },
+            ]
           }
 
           forward = {
             target_group_arn = aws_lb_target_group.api.arn
+          }
+        }
+        "to-ui" = {
+          priority = 40
+
+          conditions = {
+            http_header = [
+              {
+                http_header_name = "X-Ops"
+                values           = ["for", "example"]
+              }
+            ]
+            http_request_method = ["GET", "POST"]
+            source_ip           = ["127.0.0.1/32"]
+          }
+
+          forward = {
+            target_group_arn = aws_lb_target_group.ui.arn
           }
         }
       }
