@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.2.0...v1.3.0) (2022-02-18)
+
+
+### Features
+
+* add default values for variables ([2e4d20c](https://github.com/edelwud/terrafrom-aws-alb/commit/2e4d20c4750fe23e5bab11dd785073d2aef17956))
+* replace `project_name`, `environment`, `application` with `name` ([67f5d0c](https://github.com/edelwud/terrafrom-aws-alb/commit/67f5d0c47b02a1977508abac45db5deb79d7cdda))
+
+
+### Bug Fixes
+
+* alb resources tags ([ab9aa0e](https://github.com/edelwud/terrafrom-aws-alb/commit/ab9aa0e8977c127beb0c587397cbc14a27521e2d))
+
 ## [1.2.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.1.0...v1.2.0) (2022-02-18)
 
 
