@@ -15,11 +15,13 @@ variable "environment" {
 
 variable "type" {
   type        = string
+  default     = "application"
   description = "AWS load balancer type"
 }
 
 variable "internal" {
   type        = bool
+  default     = false
   description = "Is AWS Load Balancer internal?"
 }
 
@@ -48,12 +50,6 @@ variable "deletion_protection" {
   type        = string
   default     = false
   description = "AWS LB deletion protection"
-}
-
-variable "acm_certificate" {
-  type        = string
-  default     = null
-  description = "AWS ACM certificate"
 }
 
 variable "tags" {
