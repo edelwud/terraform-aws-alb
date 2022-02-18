@@ -8,7 +8,7 @@ module "vpc" {
   name = "complete-alb-vpc"
   cidr = "10.0.0.0/16"
 
-  azs             = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
+  azs             = ["us-east-1a", "us-east-1b", "us-east-1c"]
   private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 
@@ -22,12 +22,18 @@ module "vpc" {
 }
 
 resource "aws_lb_target_group" "api" {
+  name     = "complete-alb-dev-1"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = module.vpc.vpc_id
 }
 
 resource "aws_lb_target_group" "ui" {
+  name     = "complete-alb-dev-2"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = module.vpc.vpc_id
 }
-
-resource "aws_acm_certificate" "this" {}
 
 module "alb" {
   source = "../../"
@@ -49,16 +55,6 @@ module "alb" {
         port        = "443"
         protocol    = "HTTPS"
         status_code = "HTTP_301"
-      }
-    }
-    "forward-to-ui" = {
-      port            = 443
-      protocol        = "HTTPS"
-      ssl_policy      = "ELBSecurityPolicy-2016-08"
-      certificate_arn = aws_acm_certificate.this.arn
-
-      forward = {
-        target_group_arn = aws_lb_target_group.ui.arn
       }
 
       rules = {
