@@ -15,11 +15,6 @@ variable "internal" {
   description = "Is AWS Load Balancer internal?"
 }
 
-variable "vpc_id" {
-  type        = string
-  description = "AWS VPC identifier"
-}
-
 variable "subnets" {
   type        = list(string)
   description = "AWS LB subnets"
