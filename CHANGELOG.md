@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.7.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.6.0...v1.7.0) (2022-02-21)
+
+
+### Features
+
+* add dynamic block with subnet_mapping ([d1dde78](https://github.com/edelwud/terrafrom-aws-alb/commit/d1dde78b46316d2adc7a6e7d0549d9eaacbbbae9))
+* add subnet mapping variable ([f5fe43e](https://github.com/edelwud/terrafrom-aws-alb/commit/f5fe43e9e7e4c5496c056254df4ebcf901ea4d0e))
+
 ## [1.6.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.5.1...v1.6.0) (2022-02-21)
 
 
