@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.5.1](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.5.0...v1.5.1) (2022-02-18)
+
+
+### Bug Fixes
+
+* listener rule condition patterns ([db00dea](https://github.com/edelwud/terrafrom-aws-alb/commit/db00dea3af30f848ab1a2fb68b8dcb9b1e5846e6))
+
 ## [1.5.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.4.0...v1.5.0) (2022-02-18)
 
 
