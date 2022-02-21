@@ -31,6 +31,15 @@ variable "idle_timeout" {
   description = "AWS LB idle timeout"
 }
 
+variable "subnet_mapping" {
+  type = list(object({
+    subnet_id     = string
+    allocation_id = string
+  }))
+  default     = null
+  description = "AWS Load Balancer subnet mapping"
+}
+
 variable "deletion_protection" {
   type        = string
   default     = false

@@ -10,6 +10,14 @@ resource "aws_lb" "this" {
   subnets         = var.subnets
   security_groups = var.security_groups
 
+  dynamic "subnet_mapping" {
+    for_each = var.subnet_mapping
+    content {
+      subnet_id     = lookup(subnet_mapping.value, "subnet_id", null)
+      allocation_id = lookup(subnet_mapping.value, "allocation_id", null)
+    }
+  }
+
   tags = merge(var.tags, {
     Name = var.name
   })
