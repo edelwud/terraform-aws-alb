@@ -57,3 +57,13 @@ variable "listeners" {
   default     = null
   description = "AWS LB listeners"
 }
+
+variable "access_logs" {
+  type = object({
+    bucket  = string
+    prefix  = string
+    enabled = bool
+  })
+  default     = null
+  description = "AWS ALB access logs"
+}
