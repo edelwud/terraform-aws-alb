@@ -8,7 +8,8 @@ Terraform module for AWS provider which creates `aws_lb*` resources
 
 ```terraform
 module "alb" {
-  source = "edelwud/terraform-aws-alb"
+  source  = "edelwud/alb/aws"
+  version = "x.x.x"
 
   name = "redirect-http-https"
 
@@ -53,7 +54,8 @@ module "alb" {
 
 ```terraform
 module "alb" {
-  source = "edelwud/terraform-aws-alb"
+  source  = "edelwud/alb/aws"
+  version = "x.x.x"
 
   name = "listener-rules"
 
@@ -139,7 +141,8 @@ module "alb" {
 
 ```terraform
 module "alb" {
-  source = "edelwud/terraform-aws-alb"
+  source  = "edelwud/alb/aws"
+  version = "x.x.x"
 
   name = "cognito-oidc"
 
