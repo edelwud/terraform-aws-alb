@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.5.1...v1.6.0) (2022-02-21)
+
+
+### Features
+
+* add `versions.tf` with required `aws` provider ([70ee3a5](https://github.com/edelwud/terrafrom-aws-alb/commit/70ee3a58f6aff049de149867a920a72eff71e6f5))
+* add empty `variables.tf` and `outputs.tf` files ([c9d6cf0](https://github.com/edelwud/terrafrom-aws-alb/commit/c9d6cf0c4173e485844663ba1aa2c1f84435f91e))
+* add newline at the end of file ([8d79d3c](https://github.com/edelwud/terrafrom-aws-alb/commit/8d79d3c92977ad6e8b37bdac22ef6726ca310057))
+* add pre-commit workflow ([7f01366](https://github.com/edelwud/terrafrom-aws-alb/commit/7f01366cb3d90e094d70e0fccc360da835196a31))
+* add useful outputs variables ([8d9c0d7](https://github.com/edelwud/terrafrom-aws-alb/commit/8d9c0d7d441fa556fd92479f657bd59483abea7a))
+* remove `vpc_id` variable from `complete-alb` ([01107fa](https://github.com/edelwud/terrafrom-aws-alb/commit/01107fa3b13a0d8ceec9dffdf6ff271c814c55c5))
+* remove unused `vpc_id` variable ([ffd7e8b](https://github.com/edelwud/terrafrom-aws-alb/commit/ffd7e8bc37f1f88bf30cf745d6862566dd6210ef))
+
+
+### Bug Fixes
+
+* add Apache 2.0 LICENSE ([807b956](https://github.com/edelwud/terrafrom-aws-alb/commit/807b9564619f659301f5bdf0948df8f0a3d0e70a))
+
 ### [1.5.1](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.5.0...v1.5.1) (2022-02-18)
 
 
