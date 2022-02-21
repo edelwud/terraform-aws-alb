@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.8.0](https://github.com/edelwud/terraform-aws-alb/compare/v1.7.2...v1.8.0) (2022-02-21)
+
+
+### Features
+
+* add access logs implementation ([e03a26b](https://github.com/edelwud/terraform-aws-alb/commit/e03a26be5723f6793652f07742775701a11de63a))
+* add access logs variable ([6637507](https://github.com/edelwud/terraform-aws-alb/commit/663750769ec477090dfdd3d0cda7cfbe976c8505))
+* add terraform-aws-alb module documentation ([40b349c](https://github.com/edelwud/terraform-aws-alb/commit/40b349c834adab78e8ba2d5accadd0757de5213a))
+
 ### [1.7.2](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.7.1...v1.7.2) (2022-02-21)
 
 
