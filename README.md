@@ -76,11 +76,11 @@ module "alb" {
         protocol    = "HTTPS"
         status_code = "HTTP_301"
       }
-      
+
       rules = {
         "if-path-pattern-is-api" = {
           priority = 20
-          
+
           condition = {
             path_pattern = ["/api*"]
           }
@@ -103,7 +103,7 @@ module "alb" {
         message_body = "Fixed response content"
         status_code  = "200"
       }
-      
+
       rules = {
         "if-path-pattern-is-api" = {
           priority = 20
@@ -173,11 +173,11 @@ module "alb" {
         message_body = "Fixed response content"
         status_code  = "200"
       }
-      
+
       rules = {
         "cognito-before-api" = {
           priority = 20
-    
+
           conditions = {
             path_pattern = ["/api*"]
           }
@@ -187,7 +187,7 @@ module "alb" {
             user_pool_client_id = aws_cognito_user_pool_client.client.id
             user_pool_domain    = aws_cognito_user_pool_domain.domain.domain
           }
-          
+
           forward = {
             target_group_arn = aws_lb_target_group.api.arn
           }
@@ -200,24 +200,22 @@ module "alb" {
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 ## Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | > = 0.13.1 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | > = 3.67 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13.1 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.67 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.2.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.67 |
 
 ## Modules
 
-No
-modules.
+No modules.
 
 ## Resources
 
@@ -231,13 +229,14 @@ modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_access_logs"></a> [access\_logs](#input\_access\_logs) | AWS ALB access logs | <pre>object({<br>    bucket  = string<br>    prefix  = string<br>    enabled = bool<br>  })</pre> | `null` | no |
 | <a name="input_deletion_protection"></a> [deletion\_protection](#input\_deletion\_protection) | AWS LB deletion protection | `string` | `false` | no |
 | <a name="input_idle_timeout"></a> [idle\_timeout](#input\_idle\_timeout) | AWS LB idle timeout | `number` | `600` | no |
 | <a name="input_internal"></a> [internal](#input\_internal) | Is AWS Load Balancer internal? | `bool` | `false` | no |
 | <a name="input_listeners"></a> [listeners](#input\_listeners) | AWS LB listeners | `any` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | AWS Load Balancer name | `string` | n/a | yes |
 | <a name="input_security_groups"></a> [security\_groups](#input\_security\_groups) | AWS LB security groups | `list(string)` | n/a | yes |
-| <a name="input_subnet_mapping"></a> [subnet\_mapping](#input\_subnet\_mapping) | AWS Load Balancer subnet mapping | <pre>list(object({<br>    subnet_id = string<br>    allocation_id = string<br>  }))</pre> | `null` | no |
+| <a name="input_subnet_mapping"></a> [subnet\_mapping](#input\_subnet\_mapping) | AWS Load Balancer subnet mapping | <pre>list(object({<br>    subnet_id     = string<br>    allocation_id = string<br>  }))</pre> | `null` | no |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | AWS LB subnets | `list(string)` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags | `map(string)` | `null` | no |
 | <a name="input_type"></a> [type](#input\_type) | AWS load balancer type | `string` | `"application"` | no |
@@ -252,5 +251,4 @@ modules.
 | <a name="output_lb_listener_rules"></a> [lb\_listener\_rules](#output\_lb\_listener\_rules) | AWS Load Balancer listener rules ARN |
 | <a name="output_lb_listeners"></a> [lb\_listeners](#output\_lb\_listeners) | AWS Load Balancer listeners ARN |
 | <a name="output_lb_zone_id"></a> [lb\_zone\_id](#output\_lb\_zone\_id) | AWS Load Balancer Hosted Zone identifier |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
