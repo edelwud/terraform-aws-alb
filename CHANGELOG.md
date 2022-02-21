@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.7.1](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.7.0...v1.7.1) (2022-02-21)
+
+
+### Bug Fixes
+
+* `subnet_mapping` variable null check ([a484602](https://github.com/edelwud/terrafrom-aws-alb/commit/a484602caf4debec941fe7c653390269a105b86f))
+
 ## [1.7.0](https://github.com/edelwud/terrafrom-aws-alb/compare/v1.6.0...v1.7.0) (2022-02-21)
 
 
