@@ -18,6 +18,15 @@ resource "aws_lb" "this" {
     }
   }
 
+  dynamic "access_logs" {
+    for_each = var.access_logs != null ? [1] : []
+    content {
+      bucket  = var.access_logs.bucket
+      prefix  = var.access_logs.prefix
+      enabled = var.access_logs.enabled
+    }
+  }
+
   tags = merge(var.tags, {
     Name = var.name
   })
