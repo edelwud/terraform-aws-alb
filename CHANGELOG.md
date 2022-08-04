@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+### [1.8.1](https://github.com/edelwud/terraform-aws-alb/compare/v1.8.0...v1.8.1) (2022-08-04)
+
+
+### Bug Fixes
+
+* output namings ([b6f9177](https://github.com/edelwud/terraform-aws-alb/commit/b6f91773d7716a5248be93e13183f0d3dd5605ed))
+* README.md input variables ([750a295](https://github.com/edelwud/terraform-aws-alb/commit/750a295a6109113f149a7862bd637dce12f1152a))
+* terraform module path ([ccf1db4](https://github.com/edelwud/terraform-aws-alb/commit/ccf1db4f77e434068b2ba02c04f148e1c9df01bb))
+
 ## [1.8.0](https://github.com/edelwud/terraform-aws-alb/compare/v1.7.2...v1.8.0) (2022-02-21)
 
 
