@@ -20,10 +20,10 @@ output "lb_zone_id" {
 
 output "lb_listeners" {
   value       = aws_lb_listener.this
-  description = "AWS Load Balancer listeners ARN"
+  description = "AWS Load Balancer listeners ARN's"
 }
 
 output "lb_listener_rules" {
   value       = aws_lb_listener_rule.this
-  description = "AWS Load Balancer listener rules ARN"
+  description = "AWS Load Balancer listener rules ARN's"
 }
